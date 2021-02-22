@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Main\IndexController;
+use App\Http\Controllers\News\IndexController as NewsController;
+use App\Http\Controllers\Admin\IndexController as AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,29 +15,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-Route::get('/', function () {
-    return '<a href="/greetings">Приветствие</a>
-    <a href="/info">Инфо</a>
-    <a href="/news">Новости</a>';
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+	Route::get('/', [AdminController::class, 'index'])
+		->name('index');
 });
 
-Route::get('/greetings', function(){
-    return "greetings".'<br><a href="/">Back</a>';
-});
+Route::get('/', [IndexController::class, 'index'])
+    ->name('main');
 
-Route::get('/info', function(){
-    return "info".'<br><a href="/">Back</a>';
-});
-
-Route::get('/news', function(){
-    return '<a href="/news/{new1}">Новость_1</a>'.'<br><a href="/">Back</a>';
-});
-
-Route::get('/news/{new1}', function(){
-    return "new1".'<br><a href="/news">Back</a>';
+Route::group(['prefix' => 'news', 'as' => 'news.'], function() {
+  Route::get('/', [NewsController::class, 'index'])
+	  ->name('index');
+  Route::get('/{id}', [NewsController::class, 'oneNews'])
+	  ->where('id', '\d+')
+	  ->name('oneNews');
+  Route::get('/{cat}', [NewsController::class, 'oneCat'])
+    ->name('oneCat');
 });
