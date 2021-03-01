@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\News\IndexController as NewsController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
+use App\Http\Controllers\Contacts\IndexController as ContactsController;
+use App\Http\Controllers\Products\IndexController as ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,7 @@ Route::group(['prefix' => 'news', 'as' => 'news.'], function() {
   Route::get('/{cat}', [NewsController::class, 'oneCat'])
     ->name('oneCat');
 });
+
+Route::resource('/contacts', ContactsController::class);
+
+Route::resource('/products', ProductsController::class);

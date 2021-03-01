@@ -3,7 +3,6 @@
     News: @parent
 @endsection
 @section('content')
-
 <section class="page-section cta">
     <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
         @forelse($listNews as $key => $news)

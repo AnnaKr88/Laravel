@@ -14,6 +14,12 @@
         <li class="nav-item px-lg-4">
           <a class="nav-link text-uppercase text-expanded" href="{{ route('news.index') }}">News</a>
         </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{{ route('products.index') }}">Products</a>
+        </li>
+        <li class="nav-item px-lg-4">
+          <a class="nav-link text-uppercase text-expanded" href="{{ route('contacts.index') }}">Contact us</a>
+        </li>
       </ul>
     </div>
   </div>
