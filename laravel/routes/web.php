@@ -6,6 +6,9 @@ use App\Http\Controllers\News\IndexController as NewsController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Contacts\IndexController as ContactsController;
 use App\Http\Controllers\Products\IndexController as ProductsController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\ResourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +23,9 @@ use App\Http\Controllers\Products\IndexController as ProductsController;
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 	Route::get('/', [AdminController::class, 'index'])
 		->name('index');
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('news', AdminNewsController::class);
+    Route::resource('resources', ResourcesController::class);
 });
 
 Route::get('/', [IndexController::class, 'index'])

@@ -10,7 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>@section('title')
+              Админка
+         @show</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -34,15 +36,17 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+           
+            <x-admin-navbar></x-admin-navbar>
+            
             <!-- Main Content -->
             <div id="content">
+                <div class="container-fluid">
 
-                <!-- Topbar -->
-                <x-headerAdmin></x-headerAdmin>
-                <!-- End of Topbar -->
+                
                 @yield('content')
-           </div>
+                </div>
+            </div>
 
             <!-- End of Main Content -->
 
@@ -86,6 +90,17 @@
             </div>
         </div>
     </div>
+
+<script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Core plugin JavaScript-->
+<!--<script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
+
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+
+
 
 </body>
 
