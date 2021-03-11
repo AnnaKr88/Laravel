@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\News\IndexController as NewsController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
-use App\Http\Controllers\Contacts\IndexController as ContactsController;
-use App\Http\Controllers\Products\IndexController as ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ResourcesController;
+use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::resource('categories', CategoriesController::class);
     Route::resource('news', AdminNewsController::class);
     Route::resource('resources', ResourcesController::class);
+    Route::resource('feedback', FeedbackController::class);
+    Route::resource('order', OrderController::class);
 });
 
 Route::get('/', [IndexController::class, 'index'])
@@ -41,6 +43,14 @@ Route::group(['prefix' => 'news', 'as' => 'news.'], function() {
     ->name('oneCat');
 });
 
-Route::resource('/contacts', ContactsController::class);
+Route::get('/feedback', function ()
+{
+    return view('feedback.index');
+})
+    ->name('feedback');
+Route::get('/products', function ()
+{
+    return view('products.index');
+})
+    ->name('products');
 
-Route::resource('/products', ProductsController::class);

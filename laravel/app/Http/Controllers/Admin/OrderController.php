@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Resource;
-use App\Models\Resources;
+use App\Http\Requests\OrderRequest;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class ResourcesController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,10 @@ class ResourcesController extends Controller
      */
     public function index()
     {
-        $resList = Resources::all();
-        return view('admin.resources.index', ['resList' => $resList]);
+        $order = Order::select()
+            ->orderBy('id', 'asc')
+            ->paginate(5);
+        return view('admin.order.index', ['orderList' => $order]);
     }
 
     /**
@@ -27,29 +29,36 @@ class ResourcesController extends Controller
      */
     public function create()
     {
-        return view('admin.resources.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param OrderRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        //
+        $data = $request->all();
+        $create = Order::create($data);
+
+        if($create)
+        {
+            return redirect()->route('products')->with('success', 'Сообщение отправлено');
+        }
+        return back()->with('errors', 'Ошибка');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Order $order
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return view('admin.order.show', ['order' => $order]);
     }
 
     /**
@@ -78,11 +87,15 @@ class ResourcesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Order $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        //
+        $delete = $order->delete();
+        if($delete){
+            return redirect()->route('admin.order.index')->with('success', 'Заказ удалён.');
+        }
+        return back()->with('errors', 'Ошибка');
     }
 }

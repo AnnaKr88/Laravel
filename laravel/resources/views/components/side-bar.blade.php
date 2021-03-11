@@ -34,9 +34,16 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <h6>Управление новостями</h6>
                    <a class="collapse-item" href="{{ route('admin.resources.index')}}">Источники</a>
                     <a class="collapse-item" href="{{ route('admin.categories.index')}}">Категории</a>
                     <a class="collapse-item" href="{{ route('admin.news.index')}}">Новости</a>
+                    <hr>
+                    <h6>Обратная связь</h6>
+                    <a class="collapse-item" href="{{ route('admin.feedback.index')}}">Обратная связь</a>
+                    <hr>
+                    <h6>Заказы</h6>
+                    <a class="collapse-item" href="{{ route('admin.order.index')}}">Заказы</a>
                 </div>
             </div>
         </li>
@@ -44,8 +51,8 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        
 
-        
+
+
 
     </ul>

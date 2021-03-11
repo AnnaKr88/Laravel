@@ -17,12 +17,12 @@ class CategoriesSeeder extends Seeder
     {
         \DB::table('categories')->insert($this->getData());
     }
-    
+
     public function getData(): array
     {
         $faker = Factory::create('ru_RU');
         $data=[];
-        
+
         for($i=0; $i<5; $i++)
         {
             $title = $faker->sentence(mt_rand(3,5));
@@ -34,7 +34,7 @@ class CategoriesSeeder extends Seeder
 				'updated_at'  => now()
 			];
         }
-        
+
         return $data;
     }
 }

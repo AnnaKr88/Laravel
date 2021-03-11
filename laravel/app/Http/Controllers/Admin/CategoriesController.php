@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryUpdateRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
@@ -14,7 +18,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $catList = [];
+        $catList = Category::select()
+            ->with('news')
+            ->orderBy('id', 'asc')
+            ->paginate(5);
         return view('admin.categories.index', ['catList' => $catList]);
     }
 
@@ -31,56 +38,73 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CategoryCreateRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
-        //
+        $data = $request->only(['title', 'description']);
+        $data['slug'] = \Str::slug($data['title']);
+        $create = Category::create($data);
+        if($create) {
+            return redirect()->route('admin.categories.index')->with('success', 'Категория добавлена.');
+        }
+        return back()->withInput()->with('errors', 'Ошибка');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', ['category' => $category]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param CategoryUpdateRequest $request
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        //
+        $data = $request->only(['title', 'description']);
+        $data['slug'] = \Str::slug($data['title']);
+
+        $save = $category->fill($data)->save();
+        if($save) {
+            return redirect()->route('admin.categories.index')->with('success', 'Категория успешно обновлена.');
+        }
+        return back()->withInput()->with('errors', 'Ошибка');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $delete = $category->delete();
+        if($delete) {
+            return redirect()->route('admin.categories.index')->with('success', 'Категория успешно удалена.');
+        }
+        return back()->withInput()->with('errors', 'Ошибка');
     }
 }

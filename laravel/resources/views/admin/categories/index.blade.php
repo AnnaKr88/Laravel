@@ -10,37 +10,53 @@
                 <a href="{{ route('admin.categories.create') }}">Добавить категорию</a>
             </strong>
         </div>
+        @if(session()->has('success'))
+            <div class="alert alert-success">{{ session()->get('success') }}</div>
+        @endif
 
         <!-- Content Row -->
         <div class="row">
             <table class="table table-bordered">
                 <thead>
                 <tr>
+                    <th>№</th>
                     <th>#ID</th>
                     <th>Заголовок</th>
                     <th>Slug</th>
-                    <th>Источник</th>
                     <th>Дата добавления</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($catList as $cat)
+
+                @forelse($catList as $category)
                     <tr>
-                        <td>{{ $cat->id }}</td>
-                        <td>{{ $cat->title }}</td>
-                        <td>{{ $cat->slug }}</td>
-                        <td>{{ $cat->resource }}</td>
-                        <td>{{ $cat->created_at }}</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->title }} (Колл-во новостей: {{ $category->news->count() }})</td>
+                        <td>{{ $category->slug }}</td>
+                        <td>{{ $category->created_at }}</td>
+                        <td><a href="{{ route('admin.categories.edit', ['category' => $category]) }}">Редактировать</a>
+                            <hr>
+                            <a href="{{ route('admin.categories.show', ['category' => $category]) }}">Просмотр</a>
+                            <hr>
+                            <form action="{{ route('admin.categories.destroy', ['category' => $category]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-dark">Удалить</button>
+                            </form>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5">
+                        <td colspan="6">
                             <h2>Записей нет</h2>
                         </td>
                     </tr>
                 @endforelse
                 </tbody>
             </table>
+            {{ $catList->links() }}
         </div>
 
 

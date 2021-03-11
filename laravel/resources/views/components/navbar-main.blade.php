@@ -15,10 +15,10 @@
           <a class="nav-link text-uppercase text-expanded" href="{{ route('news.index') }}">News</a>
         </li>
         <li class="nav-item px-lg-4">
-          <a class="nav-link text-uppercase text-expanded" href="{{ route('products.index') }}">Products</a>
+          <a class="nav-link text-uppercase text-expanded" href="{{ route('products') }}">Products</a>
         </li>
         <li class="nav-item px-lg-4">
-          <a class="nav-link text-uppercase text-expanded" href="{{ route('contacts.index') }}">Contact us</a>
+          <a class="nav-link text-uppercase text-expanded" href="{{ route('feedback') }}">Contact us</a>
         </li>
       </ul>
     </div>

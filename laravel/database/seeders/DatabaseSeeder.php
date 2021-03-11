@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
         	CategoriesSeeder::class,
         	NewsSeeder::class,
-        	ResourcesSeeder::class
+        	ResourcesSeeder::class,
+            CategoriesNewsSeeder::class,
+            ResourcesCategoriesSeeder::class
         ]);
     }
 }

@@ -19,6 +19,7 @@
                     <th>Заголовок</th>
                     <th>Инфо</th>
                     <th>Дата добавления</th>
+                    <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,10 +29,15 @@
                         <td>{{ $res->title }}</td>
                         <td>{{ $res->info }}</td>
                         <td>{{ $res->created_at }}</td>
+                        <td><a href="{{ route('admin.resources.edit', ['resource' => $res]) }}">Редактировать</a>
+                            <hr>
+                            <a href="{{ route('admin.resources.show', ['resource' => $res]) }}">Просмотр</a>
+                            <hr>
+                            <a href="{{ route('admin.resources.destroy', ['resource' => $res]) }}">Удалить</a></td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <h2>Записей нет</h2>
                         </td>
                     </tr>

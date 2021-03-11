@@ -17,13 +17,13 @@ class NewsSeeder extends Seeder
     {
         \DB::table('news')->insert($this->getData());
     }
-    
+
     public function getData(): array
     {
         $faker = Factory::create('ru_RU');
         $data=[];
-        
-        for($i=0; $i<15; $i++)
+
+        for($i=0; $i<30; $i++)
         {
             $title = $faker->sentence(mt_rand(3,5));
 			$data[] = [
@@ -35,7 +35,7 @@ class NewsSeeder extends Seeder
 				'updated_at'  => now()
 			];
         }
-        
+
         return $data;
     }
 }
