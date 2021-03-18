@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Account\IndexController as AccountController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +22,21 @@ use App\Http\Controllers\Admin\OrderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-	Route::get('/', [AdminController::class, 'index'])
-		->name('index');
-    Route::resource('categories', CategoriesController::class);
-    Route::resource('news', AdminNewsController::class);
-    Route::resource('resources', ResourcesController::class);
-    Route::resource('feedback', FeedbackController::class);
-    Route::resource('order', OrderController::class);
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/account', AccountController::class)
+        ->name('account');
+    Route::group(['middleware' => 'admin'], function (){
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+            Route::get('/', [AdminController::class, 'index'])
+                ->name('index');
+            Route::resource('categories', CategoriesController::class);
+            Route::resource('news', AdminNewsController::class);
+            Route::resource('resources', ResourcesController::class);
+            Route::resource('feedback', FeedbackController::class);
+            Route::resource('order', OrderController::class);
+            Route::resource('users', UsersController::class);
+        });
+    });
 });
 
 Route::get('/', [IndexController::class, 'index'])
@@ -36,11 +45,11 @@ Route::get('/', [IndexController::class, 'index'])
 Route::group(['prefix' => 'news', 'as' => 'news.'], function() {
   Route::get('/', [NewsController::class, 'index'])
 	  ->name('index');
-  Route::get('/{id}', [NewsController::class, 'oneNews'])
-	  ->where('id', '\d+')
-	  ->name('oneNews');
-  Route::get('/{cat}', [NewsController::class, 'oneCat'])
-    ->name('oneCat');
+//  Route::get('/{id}', [NewsController::class, 'oneNews'])
+//	  ->where('id', '\d+')
+//	  ->name('oneNews');
+//  Route::get('/{cat}', [NewsController::class, 'oneCat'])
+//    ->name('oneCat');
 });
 
 Route::get('/feedback', function ()
@@ -54,3 +63,8 @@ Route::get('/products', function ()
 })
     ->name('products');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');

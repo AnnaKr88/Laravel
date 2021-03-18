@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use App\Models\News;
+use App\Models\Category;
 
 class CategoriesNewsSeeder extends Seeder
 {
@@ -20,6 +22,9 @@ class CategoriesNewsSeeder extends Seeder
     public  function getData(): array
     {
         $data=[];
+        $news = News::select('id');
+        $categories = Category::select('id');
+
         for($i=1; $i<=30; $i++)
         {
             $data[] = [

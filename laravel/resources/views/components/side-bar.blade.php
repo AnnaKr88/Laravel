@@ -42,6 +42,9 @@
                     <h6>Обратная связь</h6>
                     <a class="collapse-item" href="{{ route('admin.feedback.index')}}">Обратная связь</a>
                     <hr>
+                    <h6>Пользователи</h6>
+                    <a class="collapse-item" href="{{ route('admin.users.index')}}">Пользователи</a>
+                    <hr>
                     <h6>Заказы</h6>
                     <a class="collapse-item" href="{{ route('admin.order.index')}}">Заказы</a>
                 </div>

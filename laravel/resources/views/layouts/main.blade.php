@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>@section('title')
-              Business Casual - Start Bootstrap Theme
+              Business Casual
          @show
   </title>
 
@@ -27,7 +27,17 @@
 </head>
 
 <body>
-  <a href="{{ route('admin.index') }}">Admin Panel</a>
+  @if(Auth::check())
+    @if(Auth::user()->rights == 'admin')
+        <div class="btn btn-link">
+            <a href="{{ route('admin.index') }}">Admin Panel</a>
+        </div>
+    @endif
+  @endif
+  <x-auth></x-auth>
+  @if(session()->has('no_rights'))
+      <div class="alert alert-warning">{{ session()->get('no_rights') }}</div>
+  @endif
   <h1 class="site-heading text-center text-white d-none d-lg-block">
     <span class="site-heading-upper text-primary mb-3">A Free Bootstrap 4 Business Theme</span>
     <span class="site-heading-lower">Business Casual</span>
