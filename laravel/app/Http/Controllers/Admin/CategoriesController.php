@@ -22,6 +22,8 @@ class CategoriesController extends Controller
             ->with('news')
             ->orderBy('id', 'asc')
             ->paginate(5);
+        $list = $catList->only('id');
+        dd($list);
         return view('admin.categories.index', ['catList' => $catList]);
     }
 

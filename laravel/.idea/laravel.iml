@@ -126,6 +126,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/fortify" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pragmarx/google2fa" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dasprid/enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/socialite" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/socialiteproviders/vkontakte" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/socialiteproviders/manager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/socialiteproviders/facebook" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

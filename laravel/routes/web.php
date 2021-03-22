@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\UsersController;
+use \App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +69,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');
+
+Route::group(['middleware' => 'guest'], function(){
+    Route::get('/auth/vk', [SocialiteController::class, 'init'])
+    ->name('vk.init');
+    Route::get('/auth/vk/callback', [SocialiteController::class, 'callback'])
+        ->name('vk.callback');
+});

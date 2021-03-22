@@ -12,7 +12,8 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        <a href="{{ route('vk.init')}}"><strong>VK|</strong></a>
+                        <a href="#"><strong>FB|</strong></a>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail адрес') }}</label>
 
