@@ -72,7 +72,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 
 Route::group(['middleware' => 'guest'], function (){
    Route::get('/auth/{provider}', [SocialiteController::class, 'init'])
-   ->name('init');
-    Route::get('/auth/vkontakte/callback', [SocialiteController::class, 'callback'])
+        ->name('init');
+   Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback'])
         ->name('callback');
 });
