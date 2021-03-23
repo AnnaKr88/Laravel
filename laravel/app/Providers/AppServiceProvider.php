@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(DuskServiceProvider::class);
         }
 
-        $this->app->bind(SocialService::class, function () {
+        $this->app->bind(SocialService::class, function(){
             return new SocialService();
         });
 

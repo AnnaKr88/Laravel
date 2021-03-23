@@ -123,7 +123,6 @@
       <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
       <path value="$PROJECT_DIR$/vendor/socialiteproviders/vkontakte" />
       <path value="$PROJECT_DIR$/vendor/socialiteproviders/manager" />
-      <path value="$PROJECT_DIR$/vendor/socialiteproviders/facebook" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

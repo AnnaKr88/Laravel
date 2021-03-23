@@ -10,10 +10,10 @@
                 <div class="card-header">{{ __('Вход') }}</div>
 
                 <div class="card-body">
+                    <a href="{{ route('init', ['provider' => 'vkontakte']) }}">VK|</a>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <a href="{{ route('vk.init')}}"><strong>VK|</strong></a>
-                        <a href="#"><strong>FB|</strong></a>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail адрес') }}</label>
 

@@ -8,18 +8,18 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function init()
+    public function init($provider): \Symfony\Component\HttpFoundation\RedirectResponse
     {
-        return Socialite::driver('vkontakte')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
-    public function callback(SocialService $service)
+
+    public function callback(SocialService $service): \Illuminate\Http\RedirectResponse
     {
         $user = Socialite::driver('vkontakte')->user();
         $authUser = $service->updateUser($user);
-        if($authUser) {
+
+        if($authUser)
+        {
             \Auth::login($authUser);
             return redirect()->route('account');
         }
