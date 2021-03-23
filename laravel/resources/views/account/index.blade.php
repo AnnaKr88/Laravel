@@ -12,6 +12,7 @@
 
                     <div class="card-body">
                         <h3>Профиль: {{ Auth::user()->name }}</h3>
+                        <img src="{{ Auth::user()->avatar }}" alt="">
                         <h5>{{ Auth::user()->rights }}</h5>
                         @if(Auth::user()->rights == 'admin')
                             <a href="{{ route('admin.index') }}">Admin panel</a>

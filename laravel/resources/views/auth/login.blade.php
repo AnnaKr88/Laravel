@@ -10,7 +10,8 @@
                 <div class="card-header">{{ __('Вход') }}</div>
 
                 <div class="card-body">
-                    <a href="{{ route('init', ['provider' => 'vkontakte']) }}">VK|</a>
+                    <a href="{{ route('init', ['provider' => 'vkontakte']) }}"><strong>VK|</strong></a>
+                    <a href="{{ route('init', ['provider' => 'facebook']) }}"><strong>FB|</strong></a>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
