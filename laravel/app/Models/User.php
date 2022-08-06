@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'rights'
     ];
 
     /**
@@ -39,5 +41,21 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
+        'rights' => 'string'
     ];
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin ?? false;
+    }
+
+
+    public function rights()
+    {
+        return $this->rights;
+    }
 }

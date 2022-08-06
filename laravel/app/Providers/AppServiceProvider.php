@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\SocialService;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Dusk\DuskServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+		$this->app->bind(FakeNewsService::class, function () {
+			return new FakeNewsService();
+		});
+
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
+
+        $this->app->bind(SocialService::class, function(){
+            return new SocialService();
+        });
+
     }
 
     /**
@@ -23,6 +38,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }
